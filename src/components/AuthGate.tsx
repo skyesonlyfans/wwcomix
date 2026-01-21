@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import type { ReactNode } from "react";
 import { auth } from "@/lib/firebase";
 import { onAuthStateChanged, User } from "firebase/auth";
 
@@ -13,7 +14,7 @@ export function useAuth() {
   return { user, loading };
 }
 
-export default function AuthGate({ children, fallback }: { children: React.ReactNode; fallback?: React.ReactNode }) {
+export default function AuthGate({ children, fallback }: { children: ReactNode; fallback?: ReactNode }) {
   const { user, loading } = useAuth();
   if (loading) return <div className="container"><div className="card">Loading…</div></div>;
   if (!user) return <>{fallback ?? <div className="container"><div className="card">Please sign in.</div></div>}</>;
